@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import numpy as np
 
 class encoder():
@@ -28,7 +30,7 @@ class encoder():
         """Return type of the encoder"""
         return self.coder
 
-    def split_words(self,data=["auto","nice","Auto","Tim","Tomatensalat","gehen","auto,bahn"]):
+    def split_words(self,data=[None]):
         """Use a list of words as input and returns a list of a list containing the splitted words"""
         content=[]
         self.data=data

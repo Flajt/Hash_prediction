@@ -6,13 +6,15 @@ import hashlib
 
 reader=Reader.reader()
 ret, data=reader.prepare("openthesaurus.txt")
-reader.clean_up(data,["#",";",","])
+print("\n"+"\n")
+#print(data)
+reader.clean_up(data,["#",",","[",".","(",";",")"])
 reader.remove_spaces("new_openthesaurus.txt")
 reader.remove_doubble("new_openthesaurus.txt")
 
 
 """Hash werte stimmen nicht?!"""
-"""
+
 def main():
     print("[i]: Setting up hashing function..")
     hash_file=open("hashes.txt","w",encoding="utf-8")
@@ -24,4 +26,3 @@ def main():
         hash_file.write(Hash+"\n")
     print("[*]: Done")
 main()
-"""

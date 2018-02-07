@@ -1,4 +1,4 @@
-import sys
+# -*- coding: utf-8 -*-
 
 """
 __author__:Flajt
@@ -18,26 +18,44 @@ class reader():
         return True, data
 
     def clean_up(self, data, search_args=[None]): #add more than one search_args and experiment with the order
-        """Uses a list of search arguments to remove them from the file. You may test the order of removing words. Need an upgrade"""
+        """Uses a list of search arguments to remove them from the file. You may test the order of removing words."""
         if None in search_args: #if you don`t provide args the function errors
             return TypeError("Need args!")
-        else:
+        elif None not in search_args:
+            save=[]
+            second=[]
+            final=[]
             print("[*]: Start cleaning phase one")
-            a=open(data)
-            x=0
-            while x!=len(search_args)-1: #because a computer starts counting by 0
-                self.new=open("new_"+str(self.book),"w+",encoding="utf-8")#use utf-8 for propper encoding and less text problemss
-                split_1=data.split(search_args[x])
-                for item in split_1:
-                    self.new.write(item+"\n")
-                self.new.close()#close it so you can reopen it in the next step
-                x=x+1#set count up to move to the next argument
-                if x==1:
-                    self.new=open("new_"+str(self.book))#reopen the file
-                    data=self.new.read()# and use it to find all unwanted words, if you do it in an other way you will get some problems
-                else:
-                    pass
+            data=data.split("\n")#remove new lines
+            for i in data:
+                data=i.split("\r")
+                save.append(data[0])
+            for i in save:
+                second.append(list(i))
+            oha=0
+            for i in second:
+                for letter in i:
+                    for _ in search_args:
+                        if _==letter:
+                            index=i.index(letter)
+                            i[index]=" "
+                        else:
+                            pass
+            for i in second:
+                d="".join(i)
+                final.append(d)
+            self.new=open("new_"+str(self.book),"wb")
+            storage=[]
+            for _ in final:
+                data=_.split(" ")
+                storage.append(data[0])
+            #print(storage)
+            for i in storage:
+                self.new.write(bytes(i+"\n","utf-8"))
+            self.new.close()
+            #print(final)
         print("[*]: Done with clean up phase 1!\n[i]: You can now run Phase two!")
+
 
     def remove_spaces(self,File):
         if self.default!=None:
@@ -90,3 +108,25 @@ class reader():
             data.write(output+"\n")# write everything inside
         data.close()
         print("[*]: Done!")
+"""
+        def clean_up(self, data, search_args=[None]): #add more than one search_args and experiment with the order
+            Uses a list of search arguments to remove them from the file. You may test the order of removing words. Need an upgrade
+            if None in search_args: #if you don`t provide args the function errors
+                return TypeError("Need args!")
+            elif None not in search_args:
+                print("[*]: Start cleaning phase one")
+                #ALpha=open(data) #if I try it here I get an error and if I build a new script in here it doesn`t change
+                x=0
+                while x!=len(search_args)-1: #because a computer starts counting by 0
+                    self.new=open("new_"+str(self.book),"w+",encoding="utf-8")#use utf-8 for propper encoding and less text problemss
+                    split_1=data.split(search_args[x])
+                    for item in split_1:
+                        self.new.write(item+"\n")
+                    self.new.close()#close it so you can reopen it in the next step
+                    x=x+1#set count up to move to the next argument
+                    if x==1:
+                        self.new=open("new_"+str(self.book))#reopen the file
+                        data=self.new.read()# and use it to find all unwanted words, if you do it in an other way you will get some problems
+                    else:
+                        pass
+            print("[*]: Done with clean up phase 1!\n[i]: You can now run Phase two!")"""
