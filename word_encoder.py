@@ -45,7 +45,7 @@ class encoder():
         return np.zeros(shape)
 
     def on_hot_lower(self,splitted_words, description="basic on_hot method for lower_case characters"):
-        """One hot encoder for lower_case characters, needs splitted_words as input list and returns a list of numpy matrices as output. Size(26,26)"""
+        """One hot encoder for lower_case characters, needs splitted_words as input list and returns a list of numpy matrices as output. Size default(26,26)"""
         self.coder="on_hot_lower"
         array=self.create_new_array()
         array_storage=[]
@@ -59,7 +59,7 @@ class encoder():
         return array_storage
 
     def on_hot_upper(self,splitted_words,max_word_lenght=26):
-        """One hot encoder for upper_case characters, needs splitted_words as input list and returns a list of numpy matrices as output. Size(26,26)"""
+        """One hot encoder for upper_case characters, needs splitted_words as input list and returns a list of numpy matrices as output. Size default (26,26)"""
         self.coder="on_hot_upper"
         array=self.create_new_array(shape=(max_word_lenght,26))
         array_storage=[]
@@ -73,7 +73,7 @@ class encoder():
         return array_storage
 
     def on_hot(self,splitted_words,max_word_lenght=26):
-        """One hot encoder for lower_case and upper_case characters, needs splitted_words as input list and returns a list of numpy matrices as output. Size(26,52)"""
+        """One hot encoder for lower_case and upper_case characters, needs splitted_words as input list and returns a list of numpy matrices as output. Size default (26,52)"""
         self.coder="on_hot_without_special_characters"
         array=self.create_new_array(shape=(max_word_lenght,52))
         array_storage=[]
@@ -102,10 +102,10 @@ class encoder():
         array_storage=[]
         for i in splitted_words:#iterate through every list
             for letter in i:#iterate thorugh every letter in i
-                if str.isupper(letter)==True and letter not in self.special_letters_dic:#these lines checks in wich dictionary the word is inside and figure out the matrix positions
+                if str.isupper(letter)==True and letter not in self.special_letters_dic and letter not in self.special_characters_dic: #these lines checks in wich dictionary the word is inside and figure out the matrix positions
                     position=self.general_upper_word_list[letter]
                     index=i.index(letter)
-                elif str.islower(letter)==True and letter not in self.special_letters_dic:
+                elif str.islower(letter)==True and letter not in self.special_letters_dic and letter not in self.special_characters_dic:
                     position=self.general_lower_word_list[letter]
                     index=i.index(letter)
                 elif letter in self.special_characters_dic:

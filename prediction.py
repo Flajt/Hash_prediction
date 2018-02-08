@@ -18,13 +18,13 @@ import word_encoder
 
 main_path="C:/Users/Flajt/Documents/GitHub/Hash_prediction"
 os.chdir(main_path)
-w=word_encoder.encoder({"#","@"})
+w=word_encoder.encoder({"@":69})
 w2=word_encoder.encoder()
 #t=trainer.train()
 
 words=open("new_openthesaurus.txt",encoding="utf-8").read().split("\n")
 hashes=open("hashes.txt",encoding="utf-8").read().split("\n")
-word_vectors=w.on_hot_all(words,max_word_lenght=32)
+word_vectors=w.on_hot_all(words,max_word_lenght=69)
 hash_vectors=w2.on_hot_all(hashes)
 
 #train_words=t._word_generaliser(words, advanced=True)
