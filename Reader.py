@@ -17,7 +17,7 @@ class reader():
         data=data.read().decode() #use the "rb" feature and the .decode function to prevent problems with ä,ü etc.
         return True, data
 
-    def clean_up(self, data, search_args=[None]): #add more than one search_args and experiment with the order
+    def clean_up(self, data, search_args=[None],replace_with=" "): #add more than one search_args and experiment with the order
         """Uses a list of search arguments to remove them from the file. You may test the order of removing words."""
         if None in search_args: #if you don`t provide args the function errors
             return TypeError("Need args!")
@@ -28,17 +28,16 @@ class reader():
             print("[*]: Start cleaning phase one")
             data=data.split("\n")#remove new lines
             for i in data:
-                data=i.split("\r")
-                save.append(data[0])
+                data=i.split("\r")# remove \r
+                save.append(data[0])#append the the new list
             for i in save:
-                second.append(list(i))
-            oha=0
+                second.append(list(i))#split every item in a list into words
             for i in second:
                 for letter in i:
                     for _ in search_args:
-                        if _==letter:
+                        if _==letter:# check if one of the filter args are equal to the letter
                             index=i.index(letter)
-                            i[index]=" "
+                            i[index]=replace_with#replace the letter index(the letter) with the replace_with input
                         else:
                             pass
             for i in second:
@@ -49,11 +48,9 @@ class reader():
             for _ in final:
                 data=_.split(" ")
                 storage.append(data[0])
-            #print(storage)
             for i in storage:
                 self.new.write(bytes(i+"\n","utf-8"))
             self.new.close()
-            #print(final)
         print("[*]: Done with clean up phase 1!\n[i]: You can now run Phase two!")
 
 
@@ -108,25 +105,3 @@ class reader():
             data.write(output+"\n")# write everything inside
         data.close()
         print("[*]: Done!")
-"""
-        def clean_up(self, data, search_args=[None]): #add more than one search_args and experiment with the order
-            Uses a list of search arguments to remove them from the file. You may test the order of removing words. Need an upgrade
-            if None in search_args: #if you don`t provide args the function errors
-                return TypeError("Need args!")
-            elif None not in search_args:
-                print("[*]: Start cleaning phase one")
-                #ALpha=open(data) #if I try it here I get an error and if I build a new script in here it doesn`t change
-                x=0
-                while x!=len(search_args)-1: #because a computer starts counting by 0
-                    self.new=open("new_"+str(self.book),"w+",encoding="utf-8")#use utf-8 for propper encoding and less text problemss
-                    split_1=data.split(search_args[x])
-                    for item in split_1:
-                        self.new.write(item+"\n")
-                    self.new.close()#close it so you can reopen it in the next step
-                    x=x+1#set count up to move to the next argument
-                    if x==1:
-                        self.new=open("new_"+str(self.book))#reopen the file
-                        data=self.new.read()# and use it to find all unwanted words, if you do it in an other way you will get some problems
-                    else:
-                        pass
-            print("[*]: Done with clean up phase 1!\n[i]: You can now run Phase two!")"""
