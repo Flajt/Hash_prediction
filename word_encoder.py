@@ -51,11 +51,8 @@ class encoder():
         array_storage=[]
         for i in splitted_words:#iterate through every list
             for letter in i:#iterate thorugh every letter in i
-                #print(letter)
                 position=self.word_dic[letter]
-                #print(position)
                 index=i.index(letter)
-                    #print(i)
                 array[index,position]=1
                 array=self.create_new_array(max_word_lenght,26)
             array_storage.append(array)
@@ -94,7 +91,7 @@ class encoder():
             array=self.create_new_array(shape=(max_word_lenght,52))
         return array_storage
 
-    def on_hot_all(self, splitted_words,max_word_lenght=26):
+    def on_hot_all(self, splitted_words,max_word_lenght=26):#all the on_hot* functions uses 0 and 1 to represent the letters
         """Generates a list of arrays of the size (26,56+length of sepecial_characters_dic)"""
         if self.special_characters_dic==True or None or False:
             raise ValueError("Please input a list of special characters to use this function. These list should start by: 69")
@@ -104,10 +101,8 @@ class encoder():
         array=self.create_new_array(shape=(max_word_lenght,68+len(self.special_characters_dic)))
         array_storage=[]
         for i in splitted_words:#iterate through every list
-            print(i+" "+str(len(i)))
             for letter in i:#iterate thorugh every letter in i
-                print(str(array.shape)+" "+str(len(array)))
-                if str.isupper(letter)==True and letter not in self.special_letters_dic:
+                if str.isupper(letter)==True and letter not in self.special_letters_dic:#these lines checks in wich dictionary the word is inside and figure out the matrix positions
                     position=self.general_upper_word_list[letter]
                     index=i.index(letter)
                 elif str.islower(letter)==True and letter not in self.special_letters_dic:
