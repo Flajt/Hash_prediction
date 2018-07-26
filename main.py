@@ -8,7 +8,7 @@ reader=Reader.reader()
 ret, data=reader.prepare("openthesaurus.txt")
 print("\n"+"\n")
 #print(data)
-reader.clean_up(data,["#","+","[",".","(",";",")","-","à","é","è"])
+reader.clean_up(data,["#","+","[",".","(",";",")","-","à","é","è","ê","ë","œ","α","ô","π","η","í","ó","ş","$","ă","ţ","á","σ","μ","δ","É","β","Δ",",","!","/","î","@","","‰","]","'","Ã","¼","¤","¶",">","â","‚","¬","³",":","*","?"],replace_with="")
 reader.remove_spaces("new_openthesaurus.txt")
 reader.remove_doubble("new_openthesaurus.txt")
 

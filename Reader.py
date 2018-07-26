@@ -29,6 +29,7 @@ class reader():
             data=data.split("\n")#remove new lines
             for i in data:
                 data=i.split("\r")# remove \r
+                data=i.split(";")
                 save.append(data[0])#append the the new list
             for i in save:
                 second.append(list(i))#split every item in a list into words
@@ -89,14 +90,14 @@ class reader():
 
     def remove_doubble(self,File):#remove the same words in a file
         """ This script will remove the same words in a file\n Stack link in source code"""
-        print("[*]: Starting remover...")
+        print("[*]: Starting cleaner...")
         data=open(File,"r",encoding="utf-8")
         new_data=data.read().split()#read it and split it in one command (looks more professionell ^^)
         #print(new_data)
         data.close()
-        print("[*]: Running remover...")
+        print("[*]: Running cleaner...")
         print("[i]: This could take some time.")
-        out=" ".join(sorted(set(new_data), key=new_data.index)) #visit: https://stackoverflow.com/questions/7794208/how-can-i-remove-duplicate-words-in-a-string-with-python for infomation
+        out=" ".join(sorted(set(new_data), key=new_data.index)) #visit: https://stackoverflow.com/questions/7794208/how-can-i-remove-duplicate-words-in-a-string-with-python for infomation; taken from their
         #print(out)
         out=out.split() #split it to create a list
         #print(out)
