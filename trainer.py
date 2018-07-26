@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 class train():
     def __init__(self):
+        """An easy function to use for the pandas.get_dummies method"""
         pass
 
     def _train_from_file(self, train_data, item_count=1000):
